@@ -1,0 +1,22 @@
+@import './_variables/general.scss';
+@import 'text.scss';
+
+body, html {
+    height:100%;
+    margin: 0;
+    @include primary-text-style;
+}
+
+div,
+span {
+    text-decoration: none;
+    outline: 0;
+}
+
+body {
+  background-color: $primary-color;
+}
+
+#main-content {
+    height: 100%;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "AngularPit",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "1.4.8",
+    "angular-route": "~1.4.8",
+    "angular-material": "~1.0.1",
+    "lodash": "~3.10.0",
+    "moment": "~2.11.1",
+    "animate.css": "~3.5.1"
+  },
+  "devDependencies": {},
+  "resolutions": {
+    "angular": "1.4.8"
+  }
+}
