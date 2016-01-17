@@ -6,23 +6,46 @@ var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 
 var paths = {
-    scss: ['./scss/**/*.scss', './scss/*.scss', './modules/**/*.scss', './directives/**/*.scss'],
-    js: ['app.js','modules/*/*.js','./directives/**/*-*.js','./services/**/*-*.js','./models/*.js'],
+    scss: [
+        './scss/**/*.scss',
+        './scss/*.scss',
+        './modules/**/*.scss',
+        './directives/**/*.scss'
+    ],
+    css: [
+        './css/*.css',
+        './css/**/*.css',
+        './bower_components/angular-material/angular-material.min.css',
+        './bower_components/animate.css/animate.min.css'
+    ],
+    js: [
+        'app.js',
+        './modules/*/!(*-*).js',
+        './modules/*/*-*.js',
+        './directives/**/*-*.js',
+        './services/**/*-*.js',
+        './models/*.js'
+    ],
+    jsbundle: [
+        './bower_components/angular/angular.min.js',
+        './bower_components/angular-route/angular-route.min.js',
+        './bower_components/angular-material/angular-material.min.js',
+        './bower_components/angular-animate/angular-animate.min.js',
+        './bower_components/angular-aria/angular-aria.min.js',
+        './bower_components/lodash/lodash.min.js',
+        './bower_components/moment/min/moment.min.js',
+        './dist/js/prod.js'
+    ]
 };
 
 gulp.task('sass', function () {
-  return gulp.src(['./scss/*.scss', './modules/**/*.scss', './directives/**/*.scss'])
+  return gulp.src(paths.scss)
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('css'));
 });
 
 gulp.task('css', ['sass'], function (done) {
-    gulp.src([
-        './css/*.css',
-        './css/**/*.css',
-        './bower_components/angular-material/angular-material.min.css',
-        './bower_components/animate.css/animate.min.css'
-    ])
+    gulp.src(paths.css)
         .pipe(concat('bundle.js'))
         .pipe(minifyCss({
             keepSpecialComments: 0
@@ -33,29 +56,13 @@ gulp.task('css', ['sass'], function (done) {
 });
 
 gulp.task('uglify', function() {
-    return gulp.src([
-        './app.js',
-        './modules/*/!(*-*).js',
-        './modules/*/*-*.js',
-        './directives/*/*-*.js',
-        './services/*/*-*.js',
-        './models/*.js'
-    ])
+    return gulp.src(paths.js)
         .pipe(uglify('prod.js'))
         .pipe(gulp.dest('dist/js/'));
 });
 
 gulp.task('buildjs', ['uglify'], function(done) {
-    gulp.src([
-        './bower_components/angular/angular.min.js',
-        './bower_components/angular-route/angular-route.min.js',
-        './bower_components/angular-material/angular-material.min.js',
-        './bower_components/angular-animate/angular-animate.min.js',
-        './bower_components/angular-aria/angular-aria.min.js',
-        './bower_components/lodash/lodash.min.js',
-        './bower_components/moment/min/moment.min.js',
-        './dist/js/prod.js'
-    ])
+    gulp.src(paths.jsbundle)
         .pipe(concat('bundle.js'))
         .pipe(rename({extname: '.min.js'}))
         .pipe(gulp.dest('dist/js'))
