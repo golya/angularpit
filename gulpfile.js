@@ -7,41 +7,41 @@ var sass = require('gulp-sass');
 
 var paths = {
     scss: [
-        './scss/**/*.scss',
-        './scss/*.scss',
-        './modules/**/*.scss',
-        './directives/**/*.scss'
+        './www/scss/**/*.scss',
+        './www/scss/*.scss',
+        './www/modules/**/*.scss',
+        './www/directives/**/*.scss'
     ],
     css: [
-        './css/*.css',
-        './css/**/*.css',
-        './bower_components/angular-material/angular-material.min.css',
-        './bower_components/animate.css/animate.min.css'
+        './www/css/*.css',
+        './www/css/**/*.css',
+        './www/bower_components/angular-material/angular-material.min.css',
+        './www/bower_components/animate.css/animate.min.css'
     ],
     js: [
-        'app.js',
-        './modules/*/!(*-*).js',
-        './modules/*/*-*.js',
-        './directives/**/*-*.js',
-        './services/**/*-*.js',
-        './models/*.js'
+        './www/app.js',
+        './www/modules/*/!(*-*).js',
+        './www/modules/*/*-*.js',
+        './www/directives/**/*-*.js',
+        './www/services/**/*-*.js',
+        './www/models/*.js'
     ],
     jsbundle: [
-        './bower_components/angular/angular.min.js',
-        './bower_components/angular-route/angular-route.min.js',
-        './bower_components/angular-material/angular-material.min.js',
-        './bower_components/angular-animate/angular-animate.min.js',
-        './bower_components/angular-aria/angular-aria.min.js',
-        './bower_components/lodash/lodash.min.js',
-        './bower_components/moment/min/moment.min.js',
-        './dist/js/prod.js'
+        './www/bower_components/angular/angular.min.js',
+        './www/bower_components/angular-route/angular-route.min.js',
+        './www/bower_components/angular-material/angular-material.min.js',
+        './www/bower_components/angular-animate/angular-animate.min.js',
+        './www/bower_components/angular-aria/angular-aria.min.js',
+        './www/bower_components/lodash/lodash.min.js',
+        './www/bower_components/moment/min/moment.min.js',
+        './www/dist/js/prod.js'
     ]
 };
 
 gulp.task('sass', function () {
   return gulp.src(paths.scss)
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('css'));
+    .pipe(gulp.dest('www/css'));
 });
 
 gulp.task('css', ['sass'], function (done) {
@@ -51,21 +51,21 @@ gulp.task('css', ['sass'], function (done) {
             keepSpecialComments: 0
         }))
         .pipe(rename({extname: '.min.css'}))
-        .pipe(gulp.dest('dist/css'))
+        .pipe(gulp.dest('www/dist/css'))
         .on('end', done);
 });
 
 gulp.task('uglify', function() {
     return gulp.src(paths.js)
         .pipe(uglify('prod.js'))
-        .pipe(gulp.dest('dist/js/'));
+        .pipe(gulp.dest('www/dist/js/'));
 });
 
 gulp.task('buildjs', ['uglify'], function(done) {
     gulp.src(paths.jsbundle)
         .pipe(concat('bundle.js'))
         .pipe(rename({extname: '.min.js'}))
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest('www/dist/js'))
         .on('end', done);
 });
 

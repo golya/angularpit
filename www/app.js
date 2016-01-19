@@ -19,3 +19,5 @@ app.config(['$routeProvider',
 ]);
 
 // routes
+dependencies.push('sample');
+routes.push({'module': 'sample'});
