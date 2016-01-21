@@ -5,43 +5,45 @@ var uglify = require('gulp-uglifyjs');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 
+var www_path = 'www/';
+
 var paths = {
     scss: [
-        './www/scss/**/*.scss',
-        './www/scss/*.scss',
-        './www/modules/**/*.scss',
-        './www/directives/**/*.scss'
+        www_path + 'scss/**/*.scss',
+        www_path + 'scss/*.scss',
+        www_path + 'modules/**/*.scss',
+        www_path + 'directives/**/*.scss'
     ],
     css: [
-        './www/css/*.css',
-        './www/css/**/*.css',
-        './www/bower_components/angular-material/angular-material.min.css',
-        './www/bower_components/animate.css/animate.min.css'
+        www_path + 'css/*.css',
+        www_path + 'css/**/*.css',
+        www_path + 'bower_components/angular-material/angular-material.min.css',
+        www_path + 'bower_components/animate.css/animate.min.css'
     ],
     js: [
-        './www/app.js',
-        './www/modules/*/!(*-*).js',
-        './www/modules/*/*-*.js',
-        './www/directives/**/*-*.js',
-        './www/services/**/*-*.js',
-        './www/models/*.js'
+        www_path + 'app.js',
+        www_path + 'modules/*/!(*-*).js',
+        www_path + 'modules/*/*-*.js',
+        www_path + 'directives/**/*-*.js',
+        www_path + 'services/**/*-*.js',
+        www_path + 'models/*.js'
     ],
     jsbundle: [
-        './www/bower_components/angular/angular.min.js',
-        './www/bower_components/angular-route/angular-route.min.js',
-        './www/bower_components/angular-material/angular-material.min.js',
-        './www/bower_components/angular-animate/angular-animate.min.js',
-        './www/bower_components/angular-aria/angular-aria.min.js',
-        './www/bower_components/lodash/lodash.min.js',
-        './www/bower_components/moment/min/moment.min.js',
-        './www/dist/js/prod.js'
+        www_path + 'bower_components/angular/angular.min.js',
+        www_path + 'bower_components/angular-route/angular-route.min.js',
+        www_path + 'bower_components/angular-material/angular-material.min.js',
+        www_path + 'bower_components/angular-animate/angular-animate.min.js',
+        www_path + 'bower_components/angular-aria/angular-aria.min.js',
+        www_path + 'bower_components/lodash/lodash.min.js',
+        www_path + 'bower_components/moment/min/moment.min.js',
+        www_path + 'dist/js/prod.js'
     ]
 };
 
 gulp.task('sass', function () {
   return gulp.src(paths.scss)
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('www/css'));
+    .pipe(gulp.dest(www_path + 'css'));
 });
 
 gulp.task('css', ['sass'], function (done) {
@@ -51,21 +53,21 @@ gulp.task('css', ['sass'], function (done) {
             keepSpecialComments: 0
         }))
         .pipe(rename({extname: '.min.css'}))
-        .pipe(gulp.dest('www/dist/css'))
+        .pipe(gulp.dest(www_path + 'dist/css'))
         .on('end', done);
 });
 
 gulp.task('uglify', function() {
     return gulp.src(paths.js)
         .pipe(uglify('prod.js'))
-        .pipe(gulp.dest('www/dist/js/'));
+        .pipe(gulp.dest(www_path + 'dist/js/'));
 });
 
 gulp.task('buildjs', ['uglify'], function(done) {
     gulp.src(paths.jsbundle)
         .pipe(concat('bundle.js'))
         .pipe(rename({extname: '.min.js'}))
-        .pipe(gulp.dest('www/dist/js'))
+        .pipe(gulp.dest(www_path + 'dist/js'))
         .on('end', done);
 });
 
