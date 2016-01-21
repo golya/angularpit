@@ -16,7 +16,7 @@ var ModuleGenerator = yeoman.generators.Base.extend({
             restCapitalName: this.modulename[0].toUpperCase() + this.modulename.slice(1)
         };
 
-        var path = "app.js",
+        var path = "www/public/app.js",
             file = this.readFileAsString(path);
 
         file += "dependencies.push('"+this.modulename+"');\n";
@@ -24,10 +24,10 @@ var ModuleGenerator = yeoman.generators.Base.extend({
 
         this.write(path, file);
 
-        this.template("module.js", "modules/"+this.modulename+"/"+this.modulename+".js", context);
-        this.template("controller.js", "modules/"+this.modulename+"/"+this.modulename+"-controller.js", context);
-        this.template("template.html.tpl", "modules/"+this.modulename+"/"+this.modulename+".html.tpl", context);
-        this.template("style.scss", "modules/"+this.modulename+"/"+this.modulename+".scss", context);
+        this.template("module.js", "www/public/modules/"+this.modulename+"/"+this.modulename+".js", context);
+        this.template("controller.js", "www/public/modules/"+this.modulename+"/"+this.modulename+"-controller.js", context);
+        this.template("template.html.tpl", "www/public/modules/"+this.modulename+"/"+this.modulename+".html.tpl", context);
+        this.template("style.scss", "www/public/modules/"+this.modulename+"/"+this.modulename+".scss", context);
 
         this.log('After gulp build you can check your new module at http://localhost:8080/#/'+this.modulename);
 
