@@ -1,4 +1,3 @@
 <div id="m-sample">
-    sample
-    {{clock.now}}
+    {{test}}
 </div>
