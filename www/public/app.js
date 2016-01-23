@@ -14,7 +14,7 @@ app.config(['$routeProvider',
             }
             $routeProvider.when(path, route)
         });
-        $routeProvider.otherwise({redirectTo: '/'});
+        $routeProvider.otherwise({redirectTo: '/sample'});
     }
 ]);
 
