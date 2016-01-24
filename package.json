@@ -13,6 +13,7 @@
     "koa-static": "^2.0.0"
   },
   "devDependencies": {
-    "module-generator": "./generators/module"
+    "module-generator": "./generators/module",
+    "koa-rest-generator": "./generators/koa-rest"
   }
 }
