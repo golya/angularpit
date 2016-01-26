@@ -12,3 +12,5 @@ app.use(serve(path.join(__dirname, '../www/public/')));
 if (!module.parent) {
     app.listen(3000);
 }
+var sample = require('./controllers/sample');
+router.get('/sample', sample.fetch);
