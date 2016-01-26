@@ -4,6 +4,7 @@ var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglifyjs');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
+var mocha = require('gulp-mocha');
 
 var www_path = 'www/';
 var public_path = www_path + 'public/';
@@ -70,6 +71,11 @@ gulp.task('buildjs', ['uglify'], function(done) {
         .pipe(rename({extname: '.min.js'}))
         .pipe(gulp.dest(public_path + 'dist/js'))
         .on('end', done);
+});
+
+gulp.task('stest', function () {
+    return gulp.src('server/test/*.js', {read: false})
+        .pipe(mocha({reporter: 'spec'}));
 });
 
 gulp.task('watch', function () {
