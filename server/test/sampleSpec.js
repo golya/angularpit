@@ -13,6 +13,6 @@ describe.only('Sample', function () {
                 assert.equal(result.status, 200);
                 assert.equal(result.body.test, 'ok');
                 done();
-            })
+            });
     });
 });
