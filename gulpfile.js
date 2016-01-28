@@ -6,8 +6,12 @@ var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var mocha = require('gulp-mocha');
 
+var server_path = './server/';
+var databases_path = server_path + 'databases/';
 var www_path = 'www/';
 var public_path = www_path + 'public/';
+
+var mysql = require(databases_path + 'mysql/setup');
 
 var paths = {
     scss: [
@@ -39,6 +43,9 @@ var paths = {
         public_path + 'bower_components/lodash/lodash.min.js',
         public_path + 'bower_components/moment/min/moment.min.js',
         public_path + 'dist/js/prod.js'
+    ],
+    models: [
+        databases_path + '/mysql/models/*.js'
     ]
 };
 
@@ -76,6 +83,10 @@ gulp.task('buildjs', ['uglify'], function(done) {
 gulp.task('stest', function () {
     return gulp.src('server/test/*.js', {read: false})
         .pipe(mocha({reporter: 'spec'}));
+});
+
+gulp.task('dbinit', function () {
+    return mysql.setup();
 });
 
 gulp.task('watch', function () {
