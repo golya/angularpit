@@ -1,13 +1,15 @@
 'use strict'
 
-module.exports.server_path = './server/';
-module.exports.databases_path = server_path + 'databases/';
-module.exports.www_path = 'www/';
-module.exports.public_path = www_path + 'public/';
-
-var mysql = require(databases_path + 'mysql/setup');
+var server_path = './server';
+var databases_path = server_path + 'databases/';
+var www_path = 'www/';
+var public_path = www_path + 'public/';
 
 module.exports.paths = {
+    server_path: server_path,
+    databases_path: databases_path,
+    www_path: www_path,
+    public_path: public_path,
     scss: [
         www_path + 'scss/**/*.scss',
         www_path + 'scss/*.scss',
