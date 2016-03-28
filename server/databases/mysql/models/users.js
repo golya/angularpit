@@ -28,10 +28,10 @@ module.exports = function(sequelize, DataTypes) {
 
     var options = {
         associate: function(models) {
+            models.user.hasOne(models.hash, {onDelete: 'cascade', hooks:true});
         }
     };
 
     var User = sequelize.define('user', schema, options);
-
     return User;
 };
