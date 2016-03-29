@@ -17,6 +17,7 @@ module.exports.init = function () {
         .forEach(function (file) {
             var model = client.import(path.join(__dirname + '/models', file));
             module.exports[model.name] = model;
+            models[model.name] = model;
         });
 
     Object.keys(models).forEach(function (modelName) {
